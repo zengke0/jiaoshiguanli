@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学IT - 后台管理系统</title>
+    <?php include '/view/common/css.html' ?>
+</head>
+<body>
+    <!-- 登录 -->
+    <div class="login">
+        <div class="login-wrap">
+            <div class="avatar">
+                <img src="/view/public/uploads/monkey.png" class="img-circle" alt="">
+            </div>
+            <form id="formSubmit" class="col-md-offset-1 col-md-10">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">
+                        <i class="fa fa-user"></i>
+                    </span>
+                    <input type="text" class="form-control" name="tc_name" placeholder="用户名">
+                </div>
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">
+                        <i class="fa fa-key"></i>
+                    </span>
+                    <input type="password" class="form-control" name="tc_pass" placeholder="密码">
+                </div>
+                <button type="submit" class="btn btn-lg btn-primary btn-block">登 录</button>
+            </form>
+        </div>
+    </div>
+    
+    <?php include '/view/common/script.html' ?>
+
+    <!--为表单注册事件，点击发送ajax请求验证账号-->
+    <script>
+        $("#formSubmit").submit(function(){
+            // 获取数据 将数据序列化成对象 用serializeArray()方法
+            var data = $(this).serializeArray();
+            // 发送ajax请求
+            $.ajax({
+                url:'/api/login',
+                type:'post',
+                data:data,
+                success:function(info){
+                    if(info.code == 200){
+                        // 当登陆成功后，用cookie的方式把输入的用户名和头像信息保存起来 信息在result中
+                        // cookie保存的是字符串 所以要把json格式的信息转变为字符串
+                        // 保存后，把信息重新渲染到头像模块 ，修改头像和用户名
+                        $.cookie("tcInfo",JSON.stringify(info.result));
+                        window.location.href = 'index';
+                        // console.log(info.result);
+                    }
+                },
+                error:function(errinfo){
+                    alert('输入的用户名或者有错误');
+                }
+            })
+            return false;
+        })
+    </script>
+</body>
+</html>
