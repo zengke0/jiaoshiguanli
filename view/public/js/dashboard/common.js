@@ -11,7 +11,7 @@
 
 
 // 将上面文件改造成模块化 注意要引入的模块
-define(['jquery','cookie','template'],function ($,cookie,template) {
+define(['jquery', 'cookie', 'template'], function ($, cookie, template) {
 	if (!$.cookie('PHPSESSID') && location.pathname != '/login') {
 		location.href = 'login';
 	}
@@ -24,5 +24,23 @@ define(['jquery','cookie','template'],function ($,cookie,template) {
 		console.log(htmlStr);
 		$('.aside>.profile').html(htmlStr);
 	}
+
+	// 退出功能
+
+	// 退出功能的模块
+	// 为退出按钮注册事件，点击返回到登录页面、
+	$("#logoutBtn").on("click", function () {
+		$.ajax({
+			url: "/api/logout",
+			type: "post",
+			success: function (info) {
+				if (info.code == 200) {
+					alert("退出成功");
+					location.href = '/login';
+				}
+
+			}
+		})
+	})
 })
 

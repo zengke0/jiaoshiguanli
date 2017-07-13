@@ -26,20 +26,5 @@ define(['jquery', 'cookie'], function ($, cookie) {
         return false;
     });
 
-    // 退出功能的模块
-    // 为退出按钮注册事件，点击返回到登录页面、
-    $("#logoutBtn").on("click", function () {
-        alert("123");
-        $.ajax({
-            url: "/api/logout",
-            type: "post",
-            success: function (info) {
-                if (info.code == 200) {
-                    alert("退出成功");
-                    location.href = '/login';
-                }
-
-            }
-        })
-    })
+    
 })
