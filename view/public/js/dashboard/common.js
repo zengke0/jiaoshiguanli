@@ -21,7 +21,6 @@ define(['jquery', 'cookie', 'template'], function ($, cookie, template) {
 	if (location.pathname != '/login' && location.pathname != "/dashboard/login" && location.pathname != "/view/dashboard/login") {
 		var tcInfo = JSON.parse($.cookie("tcInfo"));
 		var htmlStr = template("tp_aside_avatar", tcInfo);
-		console.log(htmlStr);
 		$('.aside>.profile').html(htmlStr);
 	}
 
@@ -46,11 +45,11 @@ define(['jquery', 'cookie', 'template'], function ($, cookie, template) {
 	// 侧边栏的一些下拉菜单的交互功能
 	// 给课程管理添加点击事件，是通过上一个兄弟元素是a的所有ul的上一个子元素找到课程管理
 	// console.log($(".navs a+ul").prev());
-	$(".navs a+ul").prev().on("click",function(){
+	$(".navs a+ul").prev().on("click", function () {
 		// alert("12345");
 		// 通过当前点击的对象，找到下一个元素，也就是ul，让其进行下拉
 		$(this).next().slideToggle();
-		console.log($(this));
+		// console.log($(this));
 	})
 })
 
