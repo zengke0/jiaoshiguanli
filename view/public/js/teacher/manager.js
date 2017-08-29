@@ -1,26 +1,12 @@
-define(["jquery", 'template', 'form', 'datepicker', "datepickerzh"], function ($, template, form, dt, dtzh) {
-    var search = location.search;
-    // 截取字符串
-    search = search.slice(1);
-    // 分割字符串
-    var searchArr = search.split("&");
-    // console.log(searchArr);
-    var obj = {};
-    // 遍历数组
-    for (var i = 0; i < searchArr.length; i++) {
-        // 分割字符串
-        var temp = searchArr[i].split("=");
-        // console.log(temp);
-        // 存入对象中
-        obj[temp[0]] = temp[1];
-    };
-    var id = obj.tc_id;
+define(['utils',"jquery", 'template', 'form', 'datepicker', "datepickerzh"], function (utils,$, template, form, dt, dtzh) {
+    // 获取当前id
+    var id = utils.queryString().tc_id;
     if (id) {
         // 发送ajax请求
         $.ajax({
             url: "/api/teacher/edit",
             type: 'get',
-            data: { tc_id: obj.tc_id },
+            data: { tc_id: id },
             success: function (info) {
                 info.result.title = "讲师编辑";
                 info.result.saveBtn = "保 存"

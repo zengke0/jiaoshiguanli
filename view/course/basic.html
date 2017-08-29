@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>学IT - 后台管理系统</title>
+    <?php include '/view/common/css.html' ?>
+</head>
+
+<body>
+
+    <!-- 侧边栏 -->
+    <?php include '/view/common/aside.html' ?>
+    <!-- 主体 -->
+    <div class="main">
+        <div class="container-fluid">
+            <!-- 头部 -->
+            <?php include '/view/common/header.html' ?>
+            <div class="body course-add">
+                <!-- 面包屑 -->
+                <ol class="breadcrumb">
+                    <li><a href="javascript:;">课程管理</a></li>
+                    <li class="active">课程添加</li>
+                </ol>
+                <div class="steps">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php include '/view/common/script.html' ?>
+
+    <!--基本信息模板-->
+    <script type="text/html" id="cs_basic_tpl">
+        <!-- 摘要 -->
+        <div class="brief">
+            <div class="thumb">
+                <img src="{{cs_cover}}" alt="">
+            </div>
+            <dl class="info">
+                <dt>{{cs_name}}</dt>
+            </dl>
+        </div>
+        <!-- 步聚 -->
+        <ul class="forwards list-unstyled">
+            <li>
+                <a href="/view/course/basic?cs_id={{cs_id}}" class="active">
+                       <b>1</b>
+                       基本信息
+                </a>
+            </li>
+            <li>
+                <a href="/view/course/pic?cs_id={{cs_id}}">
+                      <b>2</b>
+                      课程图片
+                </a>
+            </li>
+            <li>
+                <a href="/view/course/lesson?cs_id={{cs_id}}">
+                       <b>3</b>
+                       课时管理
+                </a>
+            </li>
+        </ul>
+        <!-- 基本信息 -->
+        <div class="content">
+            <!-- 标题 -->
+            <div class="title">
+                <h5>基本信息 <small>BASIC INFORMATION</small></h5>
+            </div>
+            <form action="" class="basic form-horizontal">
+                <input type="hidden" name="cs_id" value="{{cs_id}}">
+                <div class="form-group">
+                    <label for="" class="col-md-2 control-label">标题</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control input-sm" name='cs_name' value="{{cs_name}}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-md-2 control-label">课程描述</label>
+                    <div class="col-md-8 ckeditor">
+                        <textarea name="" rows="15" class="form-control input-sm" name="cs_brief" id='cs_brief'>{{cs_brief}}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-md-2 control-label">讲师</label>
+                    <div class="col-md-8">
+                        <select name="cs_tc_id" class="form-control input-sm">
+                                {{each teacher as v i}}
+                                    <option value="">{{v.tc_name}}</option>
+                                {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-md-2 control-label">分类</label>
+                    <div class="col-md-8">
+                        <select name="cs_cg_id" class="form-control input-sm">
+                                {{each teacher as v i}}
+                                    <option value="">{{v.cg_name}}</option>
+                                {{/each}}
+                        </select>
+                        <select name="" class="form-control input-sm">
+                                        <option value="">网页设计</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-md-2 control-label">标签</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control input-sm" name='cs_tags' value='{{cs_tags}}'>
+                        <p class="help-block">将会应用于按标签搜索课程、相关课程的提取等</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <button class="btn btn-success btn-sm pull-right saveBtn">保 存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </script>
+    <!--调用模块-->
+    <script>
+        require(['js/course/basic']);
+    </script>
+</body>
+
+</html>

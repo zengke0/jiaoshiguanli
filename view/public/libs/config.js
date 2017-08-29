@@ -17,9 +17,12 @@ require.config({
         'datepickerzh':"assets/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min",
         'uploadify':'assets/uploadify/jquery.uploadify',
         'region':"assets/jquery-region/jquery.region",
-        'ckeditor':"assets/ckeditor/ckeditor"
+        'ckeditor':"assets/ckeditor/ckeditor",
+        'utils':'js/utils/utils',
+        'jcrop':'assets/jquery-jcrop/js/jcrop',
+        'echarts':'assets/echarts/echarts.min'
     },
-    // 因为bootstrap本身不支持模块化，所以的添加依赖文件，使得bootstrap支持模块化
+    // 因为bootstrap本身不支持模块化，所以得添加依赖文件，使得bootstrap支持模块化
     shim:{
         'bootstrap':{
             deps:['jquery']  //不支持模块化有依赖加依赖变成模块化
@@ -32,6 +35,12 @@ require.config({
         },
         'ckeditor':{
             exports:"CKEDITOR"  //非模块文件改成模块文件 这个字符串的值一定要和函数名或者变量名一致
+        },
+        'jcrop':{
+            deps:['jquery']
+        },
+        'echarts':{
+            deps:['jquery']
         }
     }
 });
